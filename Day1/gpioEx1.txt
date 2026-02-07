@@ -1,5 +1,5 @@
 
-# GPIO Ex1
+# GPIO 1 LED on/off
 
     uint8_t bBtnOn = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7);
     if(bBtnOn == GPIO_PIN_RESET)
@@ -11,4 +11,26 @@
     {
       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
     } 
+
+#-------------------------------------------------------
+
+# GPIO All LED on/off
+void setBtnTest_AllLedOn(void)
+{
+    uint8_t bBtnOn = ReadButton(TURN_ON_BTN);
+    if(bBtnOn == BTN_STATE_ON) {
+      if(bLedOn == PIN_SET_OFF) {
+        bLedOn = PIN_SET_ON;
+        setAllLed(bLedOn);
+      }
+    }
+    uint8_t bBtnOff = ReadButton(TURN_OFF_BTN);
+    if(bBtnOff == BTN_STATE_ON) {
+      if(bLedOn == PIN_SET_ON) {
+        bLedOn = PIN_SET_OFF;
+        setAllLed(bLedOn);
+      }
+    } 
+    HAL_Delay(10);
+}
 
