@@ -10,8 +10,9 @@ void HAL_SYSTICK_Callback(void)
 
 //----------------------------------------
 testfunc2.c 와 testfunc2.h 를 프로젝트에 추가해주세요.
+
 //-----------------------------------------
-// # GPIO_Callback -> testfunc1.c
+// # GPIO_Callback setAllLed -> testfunc1.c
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     if(GPIO_Pin == GPIO_PIN_7) {
@@ -22,3 +23,15 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
       setAllLed(PIN_SET_OFF);
     }
 }
+//-----------------------------------------
+// # GPIO_Callback TurnOnProc -> testfunc1.c
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if(GPIO_Pin == GPIO_PIN_7) {
+      doTurnOnProc();
+    } 
+    else if (GPIO_Pin == GPIO_PIN_9) {
+      doTurnOffProc();
+    }
+}
+
