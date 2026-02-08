@@ -1,5 +1,5 @@
 
-# GPIO 1 LED on/off
+# GPIO 1 LED on/off  -> main.c
 
     uint8_t bBtnOn = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_7);
     if(bBtnOn == GPIO_PIN_RESET)
@@ -13,7 +13,7 @@
     } 
 
 //-------------------------------------------------------
-# GPIO All LED on/off
+# GPIO All LED on/off  -> testfunc2.c
 void setBtnTest_AllLedOn(void)
 {
     uint8_t bBtnOn = ReadButton(TURN_ON_BTN);
@@ -34,7 +34,9 @@ void setBtnTest_AllLedOn(void)
 }
 
 //----------------------------------------
-// # Blink Test
+testfunc1.c 와 testfunc1.h 를 프로젝트에 추가해주세요.
+//----------------------------------------
+// # Blink Test  -> testfunc2.c
 void BlinkStart(uint8_t bStart)
 {
   bStartBlink = bStart;
@@ -57,7 +59,7 @@ void doBlinkTest(void)
    HAL_Delay(100);
 }
 //-----------------------------------------
-// # Set Blink Test
+// # Set Blink Test  -> testfunc2.c
 void setBlinkTest(void)
 {
     uint8_t bBtnOn = ReadButton(TURN_ON_BTN);
@@ -76,7 +78,7 @@ void setBlinkTest(void)
 }
 
 //-------------------------------------------
-// # LED Shift Test
+// # LED Shift Test  -> testfunc2.c
 uint8_t ledvar = 1;
 
 void printbin(uint8_t input)
@@ -133,7 +135,7 @@ void doLedShiftTest(void)
 }
 
 //-----------------------------------------
-// # Set LedShiftTest by ReadButton
+// # Set LedShiftTest by ReadButton  -> testfunc2.c
 void setLedShiftTest_ReadButton(void)
 {
     uint8_t bBtnOn = ReadButton(TURN_ON_BTN);
