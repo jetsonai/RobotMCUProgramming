@@ -1,0 +1,24 @@
+// #HAL_SYSTICK -> main.c
+int loopcnt;
+void HAL_SYSTICK_Callback(void)
+{
+  /* NOTE : This function Should not be modified, when the callback is needed,
+            the HAL_SYSTICK_Callback could be implemented in the user file
+   */
+  loopcnt++;
+}
+
+//----------------------------------------
+testfunc2.c 와 testfunc2.h 를 프로젝트에 추가해주세요.
+//-----------------------------------------
+// # GPIO_Callback -> testfunc1.c
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if(GPIO_Pin == GPIO_PIN_7) {
+      doTurnOnProc();
+    }
+
+    else if(GPIO_Pin == GPIO_PIN_9) {
+      doTurnOffProc();
+    }
+}
