@@ -9,6 +9,7 @@ void HAL_SYSTICK_Callback(void)
 }
 
 //----------------------------------------
+새로운 cubeMX 프로젝트를 시작한 후 가이드에 따라 세팅 -> IAR 프로젝트 생성
 testfunc2.c 와 testfunc2.h 를 프로젝트에 추가해주세요.
 
 //-----------------------------------------
@@ -33,35 +34,4 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     else if (GPIO_Pin == GPIO_PIN_9) {
       doTurnOffProc();
     }
-}
-//-----------------------------------------
-// # TIM_Callback 
-extern TIM_HandleTypeDef htim4;
-
-uint8_t ClockFlag = PIN_SET_OFF;
-
-void doHalfLed(uint8_t bOn);
-
-void setTimerTest(uint8_t bOn)
-{
-	HAL_TIM_Base_Start_IT(&htim4);
-}
-
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-	ClockFlag = (ClockFlag==PIN_SET_OFF)? PIN_SET_ON : PIN_SET_OFF;
-    doHalfLed(ClockFlag);
-}
-
-void doHalfLed(uint8_t bOn)
-{
-  uint8_t hFlag = (bOn==PIN_SET_OFF)? PIN_SET_ON : PIN_SET_OFF;
-  SetLedOn(0, bOn);
-  SetLedOn(1, hFlag);
-  SetLedOn(2, bOn);
-  SetLedOn(3, hFlag);
-  SetLedOn(4, bOn);
-  SetLedOn(5, hFlag);
-  SetLedOn(6, bOn);
-  SetLedOn(7, hFlag);
 }
