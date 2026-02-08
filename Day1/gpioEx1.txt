@@ -12,8 +12,7 @@
       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_RESET);
     } 
 
-#-------------------------------------------------------
-
+//-------------------------------------------------------
 # GPIO All LED on/off
 void setBtnTest_AllLedOn(void)
 {
@@ -33,4 +32,48 @@ void setBtnTest_AllLedOn(void)
     } 
     HAL_Delay(10);
 }
+
+//----------------------------------------
+// # Blink Test
+void BlinkStart(uint8_t bStart)
+{
+  bStartBlink = bStart;
+  if(bStartBlink == PIN_SET_ON) {
+    blinkNum = 0;
+  }
+  else {
+    setAllLed(PIN_SET_OFF);
+  }
+}
+void doBlinkTest(void)
+{
+   if(bStartBlink == PIN_SET_ON)
+   {
+     setAllLed(PIN_SET_OFF);
+     SetLedOn(blinkNum, PIN_SET_ON);
+     blinkNum = (blinkNum < 8)? blinkNum+1: 0;
+     
+   }
+   HAL_Delay(100);
+}
+//-----------------------------------------
+// # Set Blink Test
+void setBlinkTest(void)
+{
+    uint8_t bBtnOn = ReadButton(TURN_ON_BTN);
+    if(bBtnOn == BTN_STATE_ON) {
+      if(bStartBlink == PIN_SET_OFF) {
+        BlinkStart(PIN_SET_ON);
+      }
+    }
+    uint8_t bBtnOff = ReadButton(TURN_OFF_BTN);
+    if(bBtnOff == BTN_STATE_ON) {
+      if(bStartBlink == PIN_SET_ON) {
+        BlinkStart(PIN_SET_OFF);
+      }
+    } 
+    HAL_Delay(10);
+}
+
+
 
