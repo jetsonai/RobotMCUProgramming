@@ -75,5 +75,60 @@ void setBlinkTest(void)
     HAL_Delay(10);
 }
 
+//-------------------------------------------
+// # LED Shift Test
+uint8_t ledvar = 1;
 
+void printbin(uint8_t input)
+{
+  int mask;
+  for(int i =  7; i >=0 ; i--)
+  {
+    mask = 1<<i;
+    printf("%d", input & mask? 1 : 0);
+  }
+  printf("\n");
+}
+
+void setLedBin(uint8_t input)
+{
+  int mask;
+  setAllLed(PIN_SET_OFF);
+  for (int i = 7; i >= 0; i--)
+  {
+      mask = 1 << i;
+      if(input & mask)
+        SetLedOn(i, PIN_SET_ON);
+  }
+}
+      
+void setLedShiftTest(uint8_t bOn)
+{ 
+  bStartShift = bOn;
+  ledvar = 1;
+  if(bStartShift == PIN_SET_OFF)
+  {
+      setAllLed(PIN_SET_OFF);
+  }
+
+}
+
+void doLedShiftTest(void)
+{
+  if(bStartShift == PIN_SET_ON)
+  {
+      printf("LED : %d\n", ledvar);
+      printbin(ledvar);
+      setLedBin(ledvar);
+      
+      if (ledvar < 128) {
+          ledvar <<= 1;
+      }  
+      else {
+           ledvar = 1; 
+      }
+
+      HAL_Delay(100);   
+  }
+}
 
