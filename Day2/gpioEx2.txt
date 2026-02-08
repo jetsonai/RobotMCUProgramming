@@ -35,3 +35,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     }
 }
 
+// # TIM_Callback 
+extern TIM_HandleTypeDef htim4;
+
+uint8_t ClockFlag = PIN_SET_OFF;
+
+void doHalfLed(uint8_t bOn);
+
+void setTimerTest(uint8_t bOn)
+{
+	HAL_TIM_Base_Start_IT(&htim9);
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	ClockFlag = (ClockFlag==PIN_SET_OFF)? PIN_SET_ON : PIN_SET_OFF;
+    doHalfLed(ClockFlag);
+}
