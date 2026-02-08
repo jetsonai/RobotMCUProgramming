@@ -132,3 +132,22 @@ void doLedShiftTest(void)
   }
 }
 
+//-----------------------------------------
+// # Set LedShiftTest by ReadButton
+void setLedShiftTest_ReadButton(void)
+{
+    uint8_t bBtnOn = ReadButton(TURN_ON_BTN);
+    if(bBtnOn == BTN_STATE_ON) {
+      if(bStartShift == PIN_SET_OFF) {
+        setLedShiftTest(PIN_SET_ON);
+      }
+    }
+    uint8_t bBtnOff = ReadButton(TURN_OFF_BTN);
+    if(bBtnOff == BTN_STATE_ON) {
+      if(bStartShift == PIN_SET_ON) {
+        setLedShiftTest(PIN_SET_OFF);
+      }
+    } 
+    HAL_Delay(10);
+}
+
