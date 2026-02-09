@@ -10,7 +10,7 @@ uint8_t ClockFlag = PIN_SET_OFF;
 
 void doHalfLed(uint8_t bOn);
 
-void initTimerTest(uint8_t bOn)
+void InitTimerTest(void)
 {
 	HAL_TIM_Base_Start_IT(&htim4);
 }
@@ -33,3 +33,5 @@ void doHalfLed(uint8_t bOn)
   SetLedOn(6, bOn);
   SetLedOn(7, hFlag);
 }
+
+### main.c 에서 InitTimerTest() 호출
