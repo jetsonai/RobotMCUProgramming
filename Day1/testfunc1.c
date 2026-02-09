@@ -62,18 +62,11 @@ void doBlinkTest(void)
 // # Set Blink Test
 void setBlinkTest(void)
 {
-    uint8_t bBtnOn = ReadButton(TURN_ON_BTN);
-    if(bBtnOn == BTN_STATE_ON) {
-      if(bStartBlink == PIN_SET_OFF) {
-        BlinkStart(PIN_SET_ON);
-      }
-    }
-    uint8_t bBtnOff = ReadButton(TURN_OFF_BTN);
-    if(bBtnOff == BTN_STATE_ON) {
-      if(bStartBlink == PIN_SET_ON) {
-        BlinkStart(PIN_SET_OFF);
-      }
-    } 
+
+
+
+
+    
     HAL_Delay(10);
 }
 
@@ -107,32 +100,19 @@ void setLedBin(uint8_t input)
       
 void setLedShiftTest(uint8_t bOn)
 { 
-  bStartShift = bOn;
-  ledvar = 1;
-  if(bStartShift == PIN_SET_OFF)
-  {
-      setAllLed(PIN_SET_OFF);
-  }
+
 
 }
 
 void doLedShiftTest(void)
 {
-  if(bStartShift == PIN_SET_ON)
-  {
-      printf("LED : %d\n", ledvar);
-      printbin(ledvar);
-      setLedBin(ledvar);
-      
-      if (ledvar < 128) {
-          ledvar <<= 1;
-      }  
-      else {
-           ledvar = 1; 
-      }
 
-      HAL_Delay(100);   
-  }
+
+
+
+
+
+    
 }
 
 //-----------------------------------------
@@ -140,17 +120,11 @@ void doLedShiftTest(void)
 void setLedShiftTest_ReadButton(void)
 {
     uint8_t bBtnOn = ReadButton(TURN_ON_BTN);
-    if(bBtnOn == BTN_STATE_ON) {
-      if(bStartShift == PIN_SET_OFF) {
-        setLedShiftTest(PIN_SET_ON);
-      }
-    }
-    uint8_t bBtnOff = ReadButton(TURN_OFF_BTN);
-    if(bBtnOff == BTN_STATE_ON) {
-      if(bStartShift == PIN_SET_ON) {
-        setLedShiftTest(PIN_SET_OFF);
-      }
-    } 
+
+
+
+
+    
     HAL_Delay(10);
 }
 
@@ -215,6 +189,7 @@ void setAllLed(uint8_t bOn)
   SetLedOn(6, bOn);
   SetLedOn(7, bOn);
 }
+
 
 
 
