@@ -38,6 +38,6 @@ void doHalfLed(uint8_t bOn)
 
 ### main.c 에서 
 
-#include "testfunc_u.h"
+#include "testfunc_t.h"
 
 InitTimerTest() 호출
