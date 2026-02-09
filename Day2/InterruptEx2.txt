@@ -1,0 +1,48 @@
+//----------------------------------------
+새로운 cubeMX 프로젝트를 시작한 후 가이드에 따라 세팅 -> IAR 프로젝트 생성
+testfunc_u.c 와 testfunc_u.h 를 프로젝트에 추가해주세요.
+
+//-------------------------------------------------
+// UartTest
+void UartTestStart(void)
+{
+  setvbuf(stdin, NULL, _IONBF, 0);
+  UART_Receive_IT();
+
+  memset(inputString, 0, sizeof(inputString));
+  memset(outputString, 0, sizeof(outputString));
+
+  sprintf(outputString, 
+ "\r\n====================\r\n   Hello Cortex-M          \r\n====================\r\n\r\n");
+  UART_TxString((uint8_t *)outputString);
+
+}
+
+void doUartTest2(void)
+{
+    if (UART_RxCheck())
+    {
+        HAL_Delay(3);
+        memset(inputString, 0, sizeof(inputString));
+        memset(outputString, 0, sizeof(outputString));
+
+        UART_RxString((uint8_t *)inputString);
+        //printf("rx:%s\n", inputString);
+        outputString[strlen(outputString)] ='\0';
+        
+        sprintf(outputString, "\r\n [input string: %d]:  %s\r\n"
+                , outStrCount++, inputString);
+        //UART_TxString(&huart3, (uint8_t *)outputString);
+        UART_TxString((uint8_t *)outputString);
+    }
+
+}
+
+//-----------------------------------------
+
+### main.c 에서 
+
+#include "testfunc_u.h"
+
+UartTestStart() 와 doUartTest2() 호출
+
