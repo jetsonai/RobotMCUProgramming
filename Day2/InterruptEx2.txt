@@ -1,6 +1,6 @@
 //----------------------------------------
 새로운 cubeMX 프로젝트를 시작한 후 가이드에 따라 세팅 -> IAR 프로젝트 생성
-testfunc_u.c 와 testfunc_u.h 를 프로젝트에 추가해주세요.
+testfunc_u.c, testfunc_u.h, test_uart.c, test_uart.h 를 프로젝트에 추가해주세요.
 
 //-------------------------------------------------
 // UartTest
@@ -45,4 +45,10 @@ void doUartTest2(void)
 #include "testfunc_u.h"
 
 UartTestStart() 와 doUartTest2() 호출
+
+//----------------------------------------
+//----------------------------------------
+새로운 cubeMX 프로젝트를 시작한 후 가이드에 따라 세팅 -> IAR 프로젝트 생성
+testfunc_u.c 와 testfunc_u.h 를 프로젝트에 추가해주세요.
+
 
