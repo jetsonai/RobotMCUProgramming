@@ -34,4 +34,8 @@ void doHalfLed(uint8_t bOn)
   SetLedOn(7, hFlag);
 }
 
-### main.c 에서 InitTimerTest() 호출
+### main.c 에서 
+
+#include "testfunc_u.h"
+
+InitTimerTest() 호출
