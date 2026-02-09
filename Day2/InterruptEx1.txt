@@ -34,6 +34,8 @@ void doHalfLed(uint8_t bOn)
   SetLedOn(7, hFlag);
 }
 
+//-----------------------------------------
+
 ### main.c 에서 
 
 #include "testfunc_u.h"
