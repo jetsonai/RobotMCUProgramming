@@ -13,7 +13,7 @@ void UartTestStart(void)
   memset(outputString, 0, sizeof(outputString));
 
   sprintf(outputString, 
- "\r\n====================\r\n   Hello Cortex-M          \r\n====================\r\n\r\n");
+ "\r\n====================\r\n   Hello Robot MCU   \r\n====================\r\n\r\n");
   UART_TxString((uint8_t *)outputString);
 
 }
