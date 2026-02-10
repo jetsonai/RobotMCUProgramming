@@ -1,0 +1,44 @@
+# Robot 제어를 위한 MCU 프로그래밍
+
+# 모터 Timer 테스트
+
+// 프로젝트에 MotorCtl.c, MotorCtl.h 추가
+// main.c
+
+//--------------------------------------------
+// 모터 구동 테스트
+
+#include "MotorCtl.h"
+
+void InitDriving(void)
+{
+  //void setData4PWMMotors(uint8_t mnum, uint8_t pulse, uint8_t speed, int8_t direction, uint8_t enable)
+  setData4PWMMotors(LEFTMOTOR, 100, 0, 0, 0);
+  setData4PWMMotors(RIGHTMOTOR, 100, 0, 0, 0);
+
+}
+
+#부교재 참조하여 main 함수 완성
+
+//--------------------------------------------
+
+// 프로젝트에 CAN_Unit.c, CAN_Unit.h CAN2Motor.c, CAN2Motor.h 추가
+// main.c
+
+//--------------------------------------------
+// CAN2모터 구동 테스트
+CAN2Motor 에 
+void InitDriving(void)
+{
+  //void setData4PWMMotors(uint8_t mnum, uint8_t pulse, uint8_t speed, int8_t direction, uint8_t enable)
+  setData4PWMMotors(LEFTMOTOR, 100, 10, 1, 1);
+  setData4PWMMotors(RIGHTMOTOR, 100, 10, 1, 1);
+
+  Start_CAN();
+  
+  RunningMode = RUN_DRIVING;
+
+}
+
+main.c에
+#include "CAN2Motor.h"
