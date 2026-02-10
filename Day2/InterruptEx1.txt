@@ -18,7 +18,7 @@ void InitTimerTest(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	ClockFlag = (ClockFlag==PIN_SET_OFF)? PIN_SET_ON : PIN_SET_OFF;
-    doHalfLed(ClockFlag);
+    setAllLed(ClockFlag);
 }
 
 void doHalfLed(uint8_t bOn)
