@@ -8,7 +8,7 @@
 // 모터 구동 테스트
 // MotorCtl.c
 
-//모터 제어
+//모터 제어 명령
 void doMotor(uint8_t mnum, uint8_t dir, uint32_t vel)
 {
   //uint32_t pulse = vel;
