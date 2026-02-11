@@ -11,7 +11,6 @@
 //모터 제어 명령
 void doMotor(uint8_t mnum, uint8_t dir, uint32_t vel)
 {
-  //uint32_t pulse = vel;
   SetPulse4FanPWM(mnum, dir, vel);
 }
 
