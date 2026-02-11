@@ -3,10 +3,69 @@
 # 모터 Timer 테스트
 
 // 프로젝트에 MotorCtl.c, MotorCtl.h 추가
-// main.c
 
 //--------------------------------------------
 // 모터 구동 테스트
+// MotorCtl.c
+
+//모터 제어
+void doMotor(uint8_t mnum, uint8_t dir, uint32_t vel)
+{
+  //uint32_t pulse = vel;
+  SetPulse4FanPWM(mnum, dir, vel);
+}
+
+//PWM 설정
+void SetPulse4FanPWM(uint8_t mnum, uint8_t dir, uint32_t pulseVal)
+{    
+  if(mnum == 0) {
+    if(dir == 1) {
+      HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
+      HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+      if(pulseVal > 0) {
+        MX_TIM_SetPulse(mnum, dir, pulseVal);
+        HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+      } else {
+        HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+      }
+    } else if(dir == 0) {
+      HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_1);
+      HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
+      if(pulseVal > 0) {
+        MX_TIM_SetPulse(mnum, dir, pulseVal);
+        HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
+      } else {
+        HAL_TIM_PWM_Stop(&htim2, TIM_CHANNEL_2);
+      }
+    }        
+  }
+  else if(mnum == 1) {
+    if(dir == 1) {
+      HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
+      HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_2);
+      if(pulseVal > 0) {
+        MX_TIM_SetPulse(mnum, dir, pulseVal);
+        HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+      } else {
+        HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
+      }
+    } else if (dir == 0) {
+      HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
+      HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_2);
+      if(pulseVal > 0) {
+        MX_TIM_SetPulse(mnum, dir, pulseVal);
+        HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
+      } else {
+        HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_2);
+      }
+    } 
+  }
+}
+
+
+//--------------------------------------------
+// 모터 구동 테스트
+// main.c
 
 #include "MotorCtl.h"
 
