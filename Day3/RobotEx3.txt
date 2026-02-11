@@ -1,0 +1,82 @@
+void Can2Driving(void)
+{
+  uint8_t rxDataValue[8];
+  uint32_t rxMsgID;  
+  RevMotorData revDataL; 
+  RevMotorData revDataR; 
+  
+  if(getRxMessageHeader( &rxMsgID,rxDataValue) == 1)
+  {     
+    switch(rxMsgID) 
+    {
+    case 0x01:       
+      if(RunningMode == RUN_DRIVING) { 
+        if (rxMsgID == 0x01) {
+          convert10(rxDataValue[RXDATA_L_pulse], &(revDataL.pulse));
+          convert10(rxDataValue[RXDATA_L_speed], &(revDataL.speed));
+          convert10(rxDataValue[RXDATA_L_direction], &(revDataL.direction));
+          convert10(rxDataValue[RXDATA_L_enable], &(revDataL.enable));
+          convert10(rxDataValue[RXDATA_R_pulse], &(revDataR.pulse));
+          convert10(rxDataValue[RXDATA_R_speed], &(revDataR.speed));
+          convert10(rxDataValue[RXDATA_R_direction], &(revDataR.direction));
+          convert10(rxDataValue[RXDATA_R_enable], &(revDataR.enable));
+          
+          setRevData2Motor(LEFTMOTOR, &revDataL);  
+          setRevData2Motor(RIGHTMOTOR, &revDataR);
+        }
+      }
+    break;
+      
+    default:
+      setData4PWMMotors(LEFTMOTOR, 100, 10, 1, 1);
+      setData4PWMMotors(RIGHTMOTOR, 100, 10, 1, 1);      
+      break;      
+    }
+
+  }  
+}
+
+void setRevData2Motor(int motorNum, RevMotorData * revData)
+{
+    setData4PWMMotors(motorNum, revData->pulse, revData->speed, revData->direction, revData->enable);
+}
+
+
+int SendEnc2CAN(uint32_t txMsgID, int32_t enc1, int32_t enc2)
+{
+  uint8_t txDataValue[8];
+  
+  union endi {
+      uint32_t sv;
+      uint8_t un[4];
+  } ev1, ev2;
+  
+
+  //PRINTF("id : %x enc1:%d enc2:%d \n", txMsgID, uenc1, uenc2);
+  //PRINTF("--------- enc1:%x enc2:%x \n", enc1, enc2);
+
+    uint32_t uenc1 = enc1;
+
+    ev1.sv = uenc1 + CAN_ENC_OFFSET;
+    txDataValue[0] = ev1.un[3];
+    txDataValue[1] = ev1.un[2];
+    txDataValue[2] = ev1.un[1];
+    txDataValue[3] = ev1.un[0];
+
+    uint32_t uenc2 = enc2;
+    ev2.sv = uenc2 + CAN_ENC_OFFSET;  
+    txDataValue[4] = ev2.un[3];
+    txDataValue[5] = ev2.un[2];
+    txDataValue[6] = ev2.un[1];
+    txDataValue[7] = ev2.un[0];  
+
+  return setTxMessageHeader(txMsgID, txDataValue);
+
+}
+
+void CanSendStatus(void)
+{
+    int32_t left_enc = 0x01;
+    int32_t right_enc = 0x01;
+    SendEnc2CAN(0x11, left_enc, right_enc);
+}
